@@ -1,29 +1,36 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import * as Styled from "../styled";
-import { useState } from "react";
-
-
 
 function Input() {
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('0');
+    const nameRef = useRef(null)
 
+    const [inputValue, setValue] = useState(
+      {
+        name : "",
+        price:"0"
+      }
+    )
 
       const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        if (name === '이름') {
-          setName(value);
-        } else if (name === '가격') {
+        const {name, value} = e.target;
+        if (name === 'name') {
+          setValue({...inputValue, [name]:value}); // 이름만 변경 
+        } else if (name === 'price') {
           const allNumber = value.replace(/[^0-9]/g, '');
           const addComma = new Intl.NumberFormat().format(allNumber);
-          setPrice(addComma);
+          setValue({...inputValue, [name]:addComma}); // 가격만 변경 
         }
       };
       
 
-      const handleClick = () => {
-        alert(`이름: ${name}, 가격: ${price}`);
+      const handleClick = () => { 
+        if(inputValue.name === ""){
+          alert('이름?')
+          nameRef.current.focus()
+        }else{
+          alert(`이름: ${inputValue.name}, 가격: ${inputValue.price}`);
+          setValue({name :"", price:"0"})       
+        }
       };
       
   return (
@@ -35,8 +42,10 @@ function Input() {
     <div>
     <Styled.Label>이름</Styled.Label>
     <Styled.Input 
+        ref={nameRef}
         type="text" 
-        name="이름" 
+        name="name"
+        value={inputValue.name} 
         onChange={handleChange} /> 
     </div>
 
@@ -44,8 +53,8 @@ function Input() {
     <Styled.Label>가격</Styled.Label>
     <Styled.Input 
         type="text"
-        value={price}
-        name="가격"
+        value={inputValue.price}
+        name="price"
         onChange={handleChange} />
     </div>
 

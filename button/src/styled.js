@@ -87,9 +87,11 @@ const ModalFull = styled.div`
   position: fixed;
   opacity: ${({ opacity }) => opacity};
   background-color: rgb(221, 221, 221);
+  z-index: 3;
 `;
 
 const ModalBox = styled.div`
+  z-index: 3;
   position: absolute;
   border-radius: 12px;
   box-sizing: border-box;
