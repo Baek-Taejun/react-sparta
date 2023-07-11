@@ -8,16 +8,6 @@ function Select() {
     const [modal2, setModal2] = useState(false);
     const [choice, setChoice] = useState("리액트");
     const [choice2, setChoice2] = useState("리액트");
-
-    // 25줄, 42번줄 
-    const SelectBtnHandler = (setState) => () => {
-      setState(pre => !pre) // setState가 가지고 있는 기존값(pre) => 가져와서 변경해줄꺼야. 
-    }
-
-    const ChoiceDivHandler = (setChoice, setModal) => (event) => {
-      setChoice(event.target.innerText)
-      setModal(false)
-    } // 37번 줄에 적용 
   
     
     return (
@@ -27,24 +17,24 @@ function Select() {
         
         <Styled.FlexBtn>
         <Styled.ButtonJul>
-        <Styled.SelectBtn onClick={SelectBtnHandler(setModal)}>
+        <Styled.SelectBtn onClick={() => { setModal(!modal);} }>
             <div>{choice}</div>
             <div>▼</div>
           </Styled.SelectBtn>
         {modal && (
           <>
           <Styled.ChoiceBox style={{ zIndex: 2 }}  position="absolute" >
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice, setModal)}>리액트</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice, setModal)}>자바</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice, setModal)}>스프링</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice, setModal)}>리액트네이티브</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice("리액트"); setModal(false); }}>리액트</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice("자바"); setModal(false); }}>자바</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice("스프링"); setModal(false); }}>스프링</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice("리액트네이티브"); setModal(false); }}>리액트네이티브</Styled.ChoiceDiv>
           </Styled.ChoiceBox>
              <Styled.ModalFull opacity="0" style={{ zIndex: 1 }} onClick={() => { setModal(false);} }/>
              </>  
       )}</Styled.ButtonJul>
     
        <Styled.ButtonJul>
-       <Styled.SelectBtn onClick={SelectBtnHandler(setModal2)}>
+          <Styled.SelectBtn onClick={() => { setModal2(!modal2);}}>
             <div>{choice2}</div>  
             <div>▼</div>
           </Styled.SelectBtn>
@@ -52,10 +42,10 @@ function Select() {
         {modal2 && (
           <>
           <Styled.ChoiceBox style={{ zIndex: 2 }} >
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice2, setModal2)}>리액트</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice2, setModal2)}>자바</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice2, setModal2)}>스프링</Styled.ChoiceDiv>
-            <Styled.ChoiceDiv onClick={ChoiceDivHandler(setChoice2, setModal2)}>리액트네이티브</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice2("리액트"); setModal2(false); }}>리액트</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice2("자바"); setModal2(false); }}>자바</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice2("스프링"); setModal2(false); }}>스프링</Styled.ChoiceDiv>
+            <Styled.ChoiceDiv onClick={() => { setChoice2("리액트네이티브"); setModal2(false); }}>리액트네이티브</Styled.ChoiceDiv>
           </Styled.ChoiceBox>
             <Styled.ModalFull opacity="0" style={{ zIndex: 1 }} onClick={() => { setModal2(false);} }/>
             </>
